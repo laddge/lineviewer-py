@@ -15,17 +15,17 @@ def list():
         cur.execute("SELECT name FROM contacts WHERE m_id = '{}';".format(chat[0]))
         contact = cur.fetchall()
         if contact:
-            res.append(contact[0][0])
+            res.append([chat[0], contact[0][0]])
         else:
             cur.execute("SELECT name FROM groups WHERE id = '{}';".format(chat[0]))
             group = cur.fetchall()
             if group:
-                res.append(group[0][0])
-    for i in range(len(res)):
-        print(f"{i}. {res[i]}")
+                res.append([chat[0], group[0][0]])
+    for r in res:
+        print(r[0], r[1])
 
 
-def view(i, c=0):
+def view(chat_id, c=0):
     conn = sqlite3.connect("/data/data/jp.naver.line.android/databases/naver_line")
     cur = conn.cursor()
     cur.execute("SELECT m_id, name FROM contacts")
@@ -35,8 +35,6 @@ def view(i, c=0):
     ntable = {}
     for n in names:
         ntable.update({n[0]: n[1]})
-    cur.execute("SELECT chat_id FROM chat ORDER BY last_created_time desc;")
-    chat_id = cur.fetchall()[i][0]
     cur.execute(
         "SELECT from_mid, created_time, content FROM chat_history WHERE chat_id = '"
         + chat_id
@@ -67,13 +65,13 @@ def view(i, c=0):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--list', action='store_true')
-parser.add_argument('-i', '--index', type=int)
+parser.add_argument('-i', '--chat_id')
 parser.add_argument('-c', '--count', type=int, default=0)
 args = parser.parse_args()
 if args.list:
     list()
 else:
-    if args.index is None:
+    if args.chat_id is None:
         parser.print_help()
         sys.exit(1)
-    view(args.index, args.count)
+    view(args.chat_id, args.count)

@@ -17,15 +17,22 @@ chmod a+x lineviewer
 sudo ./lineviewer -l
 ```
 
+```
+# output
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx hoge
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx fuga
+...
+```
+
 ### トーク内容を表示
-0番のトーク履歴を全て表示:
+トーク履歴を全て表示:
 
 ```
-sudo ./lineviewer -i 0
+sudo ./lineviewer -i xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 最新の10件だけ表示:
 
 ```
-sudo ./lineviewer -i 0 -c 10
+sudo ./lineviewer -i xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -c 10
 ```
