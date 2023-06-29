@@ -6,7 +6,7 @@ AndroidでLINEのトークを既読付けずに見るツール
 Termuxなどのターミナルエミュレーターで実行してください
 
 ```
-wget https://github.com/laddge/lineviewer/raw/master/dist/lineviewer
+wget https://github.com/laddge/lineviewer-py/raw/master/dist/lineviewer
 chmod a+x lineviewer
 ```
 
